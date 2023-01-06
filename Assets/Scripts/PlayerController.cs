@@ -1,55 +1,116 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     Vector2 tetherPosition;
-    public bool isTetherd;
+    public bool isTethered;
     public GameObject tether;
+    public LayerMask wallMask;
+    public float changeUpVelocitySensativity = 3.0f;
+    public float velocityReleaseMultiplier = 1.05f;
+    public float minimumVelocityForNoStuck = 1f;
 
     // Start is called before the first frame update
     void Start()
     {
 
         rb = GetComponent<Rigidbody2D>();
+        rb.velocity = new Vector2(10, 10);
 
-        
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        rb.transform.up = new Vector2(rb.velocity.y, -rb.velocity.x).normalized;
-        if (isTetherd)
-        {
-            tether.transform.up = (tetherPosition - rb.position).normalized;
-            float distance = (tetherPosition - rb.position).magnitude;
-            tether.transform.localScale = new Vector3(0.1f, distance, 1f);
-        }
+        PointUp();
 
+        DrawTether();
 
-        if (Input.anyKey)
+        HandleInput();
+
+        FixDirection();
+
+    }
+
+    private void FixDirection()
+    {
+        if (isTethered)
         {
-            
-            if (!isTetherd)
+            if (rb.velocity.magnitude > minimumVelocityForNoStuck)
             {
-                isTetherd = true;
-                tetherPosition = rb.position + 10 * new Vector2(rb.transform.up.x, rb.transform.up.y);
-                Debug.Log(tetherPosition);
+                if (Vector2.Dot(rb.velocity, rb.transform.right) > 0)
+                {
+                    rb.velocity = rb.velocity.magnitude * rb.transform.right;
+                }
+                else
+                {
+                    rb.velocity = rb.velocity.magnitude * -rb.transform.right;
+                }
             }
-            
+
+        }
+    }
+
+    private void PointUp()
+    {
+        if (isTethered)
+        {
+            rb.transform.up = (tetherPosition - rb.position).normalized;
         }
         else
         {
-            isTetherd = false;
+            if (rb.velocity.magnitude > changeUpVelocitySensativity)
+            {
+                rb.transform.up = Vector2.Perpendicular(rb.velocity).normalized;
+                if (rb.transform.up.y < 0)
+                {
+                    rb.transform.up = -rb.transform.up;
+                }
+            }
         }
+    }
 
-
-        if(isTetherd)
+    private void DrawTether()
+    {
+        if (isTethered)
         {
-            rb.velocity = rb.velocity.magnitude * rb.transform.right;
+            tether.SetActive(true);
+            tether.transform.localScale = new Vector3(0.1f, (tetherPosition - rb.position).magnitude, 1f);
+        }
+        else
+        {
+            tether.SetActive(false);
+        }
+    }
+
+    private void HandleInput()
+    {
+        if (Input.anyKey)
+        {
+
+            if (!isTethered)
+            {
+
+                RaycastHit2D hit = Physics2D.Raycast(rb.transform.position, rb.transform.up, float.MaxValue, wallMask);
+                if (hit)
+                {
+                    if (hit.collider != null)
+                    {
+                        isTethered = true;
+                        tetherPosition = hit.point;
+                    }
+                }
+            }
+
+        }
+        else
+        {
+            if (isTethered)
+            {
+                rb.velocity *= velocityReleaseMultiplier;
+            }
+            isTethered = false;
         }
     }
 }
