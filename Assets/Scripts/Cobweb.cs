@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +6,14 @@ public class Cobweb : MonoBehaviour
 {
     public bool isDestroyable;
     PlayerController player;
-    public float velocityIncreaseValue;
+	public float velocityIncreaseValue;
+	AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<PlayerController>();
+	    player = FindObjectOfType<PlayerController>();
+	    audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
