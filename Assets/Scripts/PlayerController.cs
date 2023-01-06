@@ -3,13 +3,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
-    Vector2 tetherPosition;
+    public Vector2 tetherPosition;
     public bool isTethered;
     public GameObject tether;
     public LayerMask wallMask;
     public float changeUpVelocitySensativity = 3.0f;
     public float velocityReleaseMultiplier = 1.05f;
     public float minimumVelocityForNoStuck = 1f;
+    public float extraUpMultiplier = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
         {
             if (rb.velocity.magnitude > changeUpVelocitySensativity)
             {
-                rb.transform.up = Vector2.Perpendicular(rb.velocity).normalized;
+                rb.transform.up = Vector2.Perpendicular(rb.velocity).normalized + Vector2.up * extraUpMultiplier;
                 if (rb.transform.up.y < 0)
                 {
                     rb.transform.up = -rb.transform.up;
