@@ -264,6 +264,9 @@ MonoBehaviour:
   velocityReleaseMultiplier: 1.05
   minimumVelocityForNoStuck: 1
   extraUpMultiplier: 0.1
+  gameController: {fileID: 0}
+  grabSprite: {fileID: 21300000, guid: b4b4906620c437c49b66357d490758a4, type: 3}
+  freeSprite: {fileID: 21300000, guid: 87bc653891c4bce419cf83dd51ce4461, type: 3}
 --- !u!1 &2834140901965127000
 GameObject:
   m_ObjectHideFlags: 0
