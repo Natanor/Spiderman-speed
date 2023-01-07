@@ -7,8 +7,8 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public TextMeshProUGUI TimeUI;
-    public LeaderBoardManager leaderBoardManager;
 
+    private LeaderBoardManager leaderBoardManager;
     private float levelTime;
     private int levelNumber;
     private int numberOfSwings;
@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        leaderBoardManager = GetComponent<LeaderBoardManager>();
         ResetLevel();
         isRunning = true;
         levelNumber = 1;
