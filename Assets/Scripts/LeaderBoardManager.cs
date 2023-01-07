@@ -14,6 +14,7 @@ public class LeaderBoardManager : MonoBehaviour
     // Start is called before the first frame update
     public GameObject[] leaderboardLines;
     public TMP_InputField nameInputField;
+    public TextMeshProUGUI titleGUI;
 
     private string memberId;
     void Start()
@@ -27,13 +28,12 @@ public class LeaderBoardManager : MonoBehaviour
 
             memberId = response.player_id.ToString();
 
-            if(nameInputField != null)
+            if (nameInputField != null)
             {
                 GetPlayerName();
             }
         });       
     }
-
 
     public void GetPlayerName()
     {
@@ -42,7 +42,8 @@ public class LeaderBoardManager : MonoBehaviour
             if (response.success)
             {
                 Debug.Log("Successfully set player name");
-                if(response.name == ""){
+                if (response.name == "")
+                {
                     nameInputField.text = "Guest " + Random.Range(0, 99999);
                     UpdatePlayerName();
 
@@ -112,6 +113,8 @@ public class LeaderBoardManager : MonoBehaviour
     public void UpdateLeaderboardUI(int level)
     {
         string LevelID = "LEVEL" + level;
+
+        titleGUI.text = "Leaderboard for level " + level;
 
         LootLockerSDKManager.GetMemberRank(LevelID, memberId, (response) =>
         {

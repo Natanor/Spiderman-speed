@@ -594,7 +594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5768250060317079517, guid: 71ccb6e81bfd1f443a494ccbc3049333, type: 3}
       propertyPath: m_Name
-      value: LevelLoader
+      value: Leaderboard manager
       objectReference: {fileID: 0}
     - target: {fileID: 5768250060317079519, guid: 71ccb6e81bfd1f443a494ccbc3049333, type: 3}
       propertyPath: m_RootOrder
@@ -640,7 +640,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5768250060317079516, guid: 71ccb6e81bfd1f443a494ccbc3049333, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 71ccb6e81bfd1f443a494ccbc3049333, type: 3}
 --- !u!1 &266212791
 GameObject:
@@ -779,7 +780,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1324905305}
+      - m_Target: {fileID: 5768250060317079516, guid: 71ccb6e81bfd1f443a494ccbc3049333, type: 3}
         m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
         m_MethodName: LoadNextScene
         m_Mode: 1
@@ -1102,17 +1103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leaderboardLines: []
   nameInputField: {fileID: 85714614}
---- !u!114 &1324905305 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5768250060317079516, guid: 71ccb6e81bfd1f443a494ccbc3049333, type: 3}
-  m_PrefabInstance: {fileID: 199876064}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1324905303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddc426a2ebe62f14196f8923d510601f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  titleGUI: {fileID: 0}
 --- !u!1 &1578708702
 GameObject:
   m_ObjectHideFlags: 0

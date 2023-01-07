@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class GameController : MonoBehaviour
         leaderBoardManager = GetComponent<LeaderBoardManager>();
         ResetLevel();
         isRunning = true;
-        levelNumber = 1;
+        levelNumber = SceneManager.GetActiveScene().buildIndex;
     }
 
     // Update is called once per frame
