@@ -7,11 +7,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Profiling.Memory.Experimental;
 using UnityEngine.SocialPlatforms.Impl;
+using Random = UnityEngine.Random;
 
 public class LeaderBoardManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject[] leaderboardLines;
+    public TMP_InputField nameInputField;
+
     private string memberId;
     void Start()
     {
@@ -23,11 +26,46 @@ public class LeaderBoardManager : MonoBehaviour
             }
 
             memberId = response.player_id.ToString();
-            SetPlayerName("Natanor");
-            UpdateLeaderboardUI(1);
+
+            if(nameInputField != null)
+            {
+                GetPlayerName();
+            }
         });       
     }
 
+
+    public void GetPlayerName()
+    {
+        LootLockerSDKManager.GetPlayerName((response) =>
+        {
+            if (response.success)
+            {
+                Debug.Log("Successfully set player name");
+                if(response.name == ""){
+                    nameInputField.text = "Guest " + Random.Range(0, 99999);
+                    UpdatePlayerName();
+
+                }
+                else
+                {
+                    nameInputField.text = response.name;
+                }
+            }
+            else
+            {
+                Debug.Log("Error setting player name");
+            }
+        });
+    }
+
+    public void UpdatePlayerName()
+    {
+        if (nameInputField != null)
+        {
+            SetPlayerName(nameInputField.text);
+        }
+    }
 
     static public void SetPlayerName(string name)
     {
@@ -63,14 +101,17 @@ public class LeaderBoardManager : MonoBehaviour
         
     }
 
+    public void InitializeEmptyLeaderboard()
+    {
+        for (int i = 0; i < leaderboardLines.Length; i++)
+        {
+            UpdateLeaderboardRow(new LeaderboardRow(i + 1, "-", "-", "-"), i);
+        }
+    }
+
     public void UpdateLeaderboardUI(int level)
     {
         string LevelID = "LEVEL" + level;
-
-        for(int i= 0; i < leaderboardLines.Length; i++)
-        {
-            UpdateLeaderboardRow(new LeaderboardRow(i+1, "-", "-", "-"), i);
-        }
 
         LootLockerSDKManager.GetMemberRank(LevelID, memberId, (response) =>
         {
