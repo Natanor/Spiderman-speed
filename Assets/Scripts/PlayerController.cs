@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float velocityReleaseMultiplier = 1.05f;
     public float minimumVelocityForNoStuck = 1f;
     public float extraUpMultiplier = 0.1f;
+    public GameController gameController;
 
     // Start is called before the first frame update
     void Start()
@@ -100,6 +101,7 @@ public class PlayerController : MonoBehaviour
                     {
                         isTethered = true;
                         tetherPosition = hit.point;
+                        gameController.AddSwing();
                     }
                 }
             }

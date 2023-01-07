@@ -8,9 +8,6 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class LeaderBoardManager : MonoBehaviour
 {
-    private bool didLogin;
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -18,64 +15,60 @@ public class LeaderBoardManager : MonoBehaviour
         {
             if (!response.success)
             {
-                didLogin = false;
                 return;
             }
-            didLogin = true;
 
 
             SetPlayerName("Natanor");
-            SubmitScore(999, 3, "1");
+            getScores(1);
         });       
     }
 
 
-    public void SetPlayerName(string name)
+    static public void SetPlayerName(string name)
     {
-        if (didLogin)
+       
+        LootLockerSDKManager.SetPlayerName(name, (response) =>
         {
-            LootLockerSDKManager.SetPlayerName(name, (response) =>
+            if (response.success)
             {
-                if (response.success)
-                {
-                    Debug.Log("Successfully set player name");
-                }
-                else
-                {
-                    Debug.Log("Error setting player name");
-                }
-            });
-        }
+                Debug.Log("Successfully set player name");
+            }
+            else
+            {
+                Debug.Log("Error setting player name");
+            }
+        });
+        
     }
 
-    public void SubmitScore(int timeTakenMs, int numberOfShots, string level)
+    static public void SubmitScore(int timeTakenMs, int numberOfShots, int level)
     {
-        if (didLogin)
-        {
 
-            LootLockerSDKManager.SubmitScore("", timeTakenMs, level, numberOfShots.ToString(), (response) =>
-            {
-                if (response.statusCode == 200)
-                {
-                    Debug.Log("Successful");
-                }
-                else
-                {
-                    Debug.Log("failed: " + response.Error);
-                }
-            });
-        }
-    }
-
-    public void getScores(string level)
-    {
-        int count = 50;
-
-        LootLockerSDKManager.GetScoreList(level, count, 0, (response) =>
+        LootLockerSDKManager.SubmitScore("", timeTakenMs, "LEVEL"+level, numberOfShots.ToString(), (response) =>
         {
             if (response.statusCode == 200)
             {
                 Debug.Log("Successful");
+            }
+            else
+            {
+                Debug.Log("failed: " + response.Error);
+            }
+        });
+        
+    }
+
+    static public void getScores(int level)
+    {
+        int count = 50;
+
+        LootLockerSDKManager.GetScoreList("LEVEL"+level, count, 0, (response) =>
+        {
+            if (response.statusCode == 200)
+            {
+                Debug.Log("Successful");
+                Debug.Log(response.items);
             }
             else
             {

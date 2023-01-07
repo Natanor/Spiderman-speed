@@ -7,10 +7,11 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public TextMeshProUGUI TimeUI;
+    public LeaderBoardManager leaderBoardManager;
 
     private float levelTime;
     private int levelNumber;
-    private float numberOfSwings;
+    private int numberOfSwings;
     private bool isRunning;
 
 
@@ -20,6 +21,7 @@ public class GameController : MonoBehaviour
     {
         ResetLevel();
         isRunning = true;
+        levelNumber = 1;
     }
 
     // Update is called once per frame
@@ -64,5 +66,11 @@ public class GameController : MonoBehaviour
     public void StopLevel()
     {
         isRunning = false;
+    }
+
+    public void WinLevel()
+    {
+        StopLevel();
+        LeaderBoardManager.SubmitScore(Mathf.FloorToInt(levelTime * 1000), numberOfSwings, levelNumber);
     }
 }
