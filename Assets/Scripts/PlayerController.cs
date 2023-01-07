@@ -83,11 +83,12 @@ public class PlayerController : MonoBehaviour
         {
             if (rb.velocity.magnitude > changeUpVelocitySensativity)
             {
-                rb.transform.up = Vector2.Perpendicular(rb.velocity).normalized + Vector2.up * extraUpMultiplier;
+                rb.transform.up = Vector2.Perpendicular(rb.velocity);
                 if (rb.transform.up.y < 0)
                 {
                     rb.transform.up = -rb.transform.up;
                 }
+                rb.transform.up = new Vector2(rb.transform.up.x, rb.transform.up.y) + (Vector2.up * extraUpMultiplier) / (rb.velocity.magnitude + 1);
             }
         }
     }
@@ -109,7 +110,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.anyKey)
         {
-
+            
             if (!isTethered)
             {
 
@@ -124,7 +125,6 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-
         }
         else
         {
