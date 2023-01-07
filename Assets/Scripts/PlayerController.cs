@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -13,12 +14,17 @@ public class PlayerController : MonoBehaviour
     public float extraUpMultiplier = 0.1f;
     public GameController gameController;
 
+    [Header("Sprites")]
+    public Sprite grabSprite;
+    public Sprite freeSprite;
+    private SpriteRenderer sr;
     // Start is called before the first frame update
     void Start()
     {
 
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(10, 10);
+        sr = GetComponent<SpriteRenderer>();
 
     }
 
@@ -33,6 +39,19 @@ public class PlayerController : MonoBehaviour
 
         FixDirection();
 
+        SetSprite();
+
+    }
+
+    private void SetSprite()
+    {
+        if (isTethered)
+        {
+            sr.sprite = grabSprite;
+        } else
+        {
+            sr.sprite= freeSprite;
+        }
     }
 
     private void FixDirection()
