@@ -214,6 +214,7 @@ MonoBehaviour:
   - {fileID: 1385100198}
   - {fileID: 1880561678}
   - {fileID: 1823069659}
+  nameInputField: {fileID: 0}
 --- !u!1001 &521027438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -286,10 +287,6 @@ PrefabInstance:
       propertyPath: gameController
       value: 
       objectReference: {fileID: 284803994}
-    - target: {fileID: 2834140901922823258, guid: c949f4d4a3c3a3548ad1c5538e8f29f3, type: 3}
-      propertyPath: extraUpMultiplier
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 2834140901922823259, guid: c949f4d4a3c3a3548ad1c5538e8f29f3, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1249,6 +1246,14 @@ PrefabInstance:
     - target: {fileID: 6465377927136855007, guid: 4a10503b72d3ad94690d2cf920c2b94a, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7949295701662963797, guid: 4a10503b72d3ad94690d2cf920c2b94a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 848615208}
+    - target: {fileID: 7949295701662963797, guid: 4a10503b72d3ad94690d2cf920c2b94a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadMainMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a10503b72d3ad94690d2cf920c2b94a, type: 3}

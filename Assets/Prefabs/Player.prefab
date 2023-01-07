@@ -262,7 +262,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   changeUpVelocitySensativity: 5
-  velocityReleaseMultiplier: 2
+  velocityReleaseMultiplier: 1.05
   minimumVelocityForNoStuck: 1
   extraUpMultiplier: 10
   gameController: {fileID: 0}
