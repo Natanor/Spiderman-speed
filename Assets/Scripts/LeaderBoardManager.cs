@@ -24,7 +24,7 @@ public class LeaderBoardManager : MonoBehaviour
             }
 
             memberId = response.player_id.ToString();
-            SetPlayerName("Natanor");
+            SetPlayerName("Mijetto");
             UpdateLeaderboardUI(1);
         });       
     }

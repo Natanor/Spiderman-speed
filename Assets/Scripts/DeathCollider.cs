@@ -24,8 +24,7 @@ public class DeathCollider : MonoBehaviour
                 mainCanvas.gameObject.SetActive(false);
                 deathCanvas.gameObject.SetActive(true);
 
-                deathNoise.Play();
-                Destroy(player.gameObject);
+                StartCoroutine(player.Die());
             }
         }
     }
