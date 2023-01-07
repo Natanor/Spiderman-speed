@@ -12,7 +12,6 @@ public class LeaderBoardManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject[] leaderboardLines;
-    private LeaderboardRow[] leaderboardRows;
     private string memberId;
     void Start()
     {

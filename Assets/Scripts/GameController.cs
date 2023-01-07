@@ -86,5 +86,14 @@ public class GameController : MonoBehaviour
     {
         StopLevel();
         LeaderBoardManager.SubmitScore(Mathf.FloorToInt(levelTime * 1000), numberOfSwings, levelNumber);
+        leaderBoardManager.UpdateLeaderboardUI(levelNumber);
+        StartCoroutine(UpdateScoreboard());
+    }
+
+
+    IEnumerator UpdateScoreboard()
+    {
+        yield return new WaitForSeconds(1);
+        leaderBoardManager.UpdateLeaderboardUI(levelNumber);
     }
 }
