@@ -12,7 +12,14 @@ public class GameController : MonoBehaviour
     private float levelTime;
     private int levelNumber;
     private int numberOfSwings;
-    private bool isRunning;
+    public bool isRunning;
+
+    [Header("Canvases")]
+    public Canvas aliveCanvas;
+    public Canvas deathCanvas;
+    public Canvas winCanvas;
+
+
 
 
 
@@ -34,6 +41,12 @@ public class GameController : MonoBehaviour
         }
 
         UpdateUI();
+    }
+
+    public void SetDeathCanvas()
+    {
+        deathCanvas.gameObject.SetActive(true);
+        aliveCanvas.gameObject.SetActive(false);
     }
 
     void UpdateUI()

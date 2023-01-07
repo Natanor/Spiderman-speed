@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -18,6 +19,13 @@ public class PlayerController : MonoBehaviour
     public Sprite grabSprite;
     public Sprite freeSprite;
     private SpriteRenderer sr;
+
+    private Collider2D col;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip deathSound;
+    public AudioClip tetherSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +33,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(10, 10);
         sr = GetComponent<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
 
     }
 
@@ -40,6 +49,13 @@ public class PlayerController : MonoBehaviour
         FixDirection();
 
         SetSprite();
+
+        if (!gameController.isRunning) {
+            col.enabled = false;
+        } else
+        {
+            col.enabled = true;
+        }
 
     }
 
@@ -135,4 +151,23 @@ public class PlayerController : MonoBehaviour
             isTethered = false;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Wall")
+        {
+            gameController.SetDeathCanvas();
+            StartCoroutine(Die());
+        }
+    }
+
+    public IEnumerator Die()
+    {
+        audioSource.clip = deathSound;
+        audioSource.Play();
+        gameController.isRunning = false;
+        yield return new WaitForSeconds(0.3f);
+        col.enabled = false;
+    }
+    
 }
