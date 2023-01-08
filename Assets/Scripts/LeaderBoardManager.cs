@@ -102,11 +102,12 @@ public class LeaderBoardManager : MonoBehaviour
         
     }
 
-    public void InitializeEmptyLeaderboard()
+    public void InitializeEmptyLeaderboard(int start=0)
     {
-        for (int i = 0; i < leaderboardLines.Length; i++)
+        start = Mathf.Max(start,0);
+        for (int i = start; i < leaderboardLines.Length; i++)
         {
-            UpdateLeaderboardRow(new LeaderboardRow(i + 1, "-", "-", "-"), i);
+            UpdateLeaderboardRow(new LeaderboardRow("-", "-", "-", "-"), i);
         }
     }
 
@@ -136,6 +137,7 @@ public class LeaderBoardManager : MonoBehaviour
                                 LootLockerLeaderboardMember row = response.items[i];
                                 UpdateLeaderboardRow(new LeaderboardRow(row.rank, row.player.name, row.score, row.metadata), i);
                             }
+                            InitializeEmptyLeaderboard(response.items.Length);
                         }
                         else
                         {
@@ -163,7 +165,7 @@ public class LeaderBoardManager : MonoBehaviour
                     });
 
                     //get around player
-                    LootLockerSDKManager.GetScoreList("LEVEL" + level, 3, rank-1, (response) =>
+                    LootLockerSDKManager.GetScoreList("LEVEL" + level, 3, rank-2, (response) =>
                     {
                         if (response.statusCode == 200)
                         {
@@ -172,6 +174,7 @@ public class LeaderBoardManager : MonoBehaviour
                                 LootLockerLeaderboardMember row = response.items[i];
                                 UpdateLeaderboardRow(new LeaderboardRow(row.rank, row.player.name, row.score, row.metadata), i + 5);
                             }
+                            InitializeEmptyLeaderboard(response.items.Length+5);
                         }
                         else
                         {
@@ -211,17 +214,17 @@ struct LeaderboardRow
     public readonly string Name;
     public readonly string NumberOfSwings;
     public readonly string TimeString;
-    public readonly int Position;
+    public readonly string Position;
 
     public LeaderboardRow(int Position, string Name, int TimeMs, string NumberOfSwings)
     {
         this.Name = Name;
-        this.Position = Position;
+        this.Position = Position.ToString();
         this.TimeString = TimeSpan.FromMilliseconds(TimeMs).ToString("mm\\:ss\\.fff");
         this.NumberOfSwings = NumberOfSwings;
     }
 
-    public LeaderboardRow(int Position, string Name, string TimeMs, string NumberOfSwings)
+    public LeaderboardRow(string Position, string Name, string TimeMs, string NumberOfSwings)
     {
         this.Name = Name;
         this.Position = Position;
