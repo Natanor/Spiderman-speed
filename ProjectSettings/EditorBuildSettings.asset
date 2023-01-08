@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CLIMBING 2 - THE REVENGE.unity
     guid: a7f4b675938f19e4cb1d1838e8ff6892
+  - enabled: 1
+    path: Assets/Scenes/Last Screen.unity
+    guid: c35ee62a43b42f647bdd28c69ec95c00
   m_configObjects: {}
