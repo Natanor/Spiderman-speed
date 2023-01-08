@@ -14,14 +14,14 @@ public class GameController : MonoBehaviour
     private int levelNumber;
     private int numberOfSwings;
     public bool isRunning;
+    public bool isTitleScreen;
+    private bool clickedTitle;
 
     [Header("Canvases")]
     public Canvas aliveCanvas;
     public Canvas deathCanvas;
     public Canvas winCanvas;
-
-
-
+    public Canvas titleCanvas;
 
 
     // Start is called before the first frame update
@@ -29,8 +29,19 @@ public class GameController : MonoBehaviour
     {
         leaderBoardManager = GetComponent<LeaderBoardManager>();
         ResetLevel();
-        isRunning = true;
+        isRunning = false;
         levelNumber = SceneManager.GetActiveScene().buildIndex;
+        isTitleScreen = true;
+        clickedTitle = false;
+        Time.timeScale = 0;
+
+        titleCanvas.transform.Find("Image").gameObject.transform.Find("Title").GetComponent<TextMeshProUGUI>().text = SceneManager.GetActiveScene().name;
+
+        aliveCanvas.gameObject.SetActive(false);
+        deathCanvas.gameObject.SetActive(false);
+        winCanvas.gameObject.SetActive(false);
+        titleCanvas.gameObject.SetActive(true);
+
     }
 
     // Update is called once per frame
@@ -41,6 +52,20 @@ public class GameController : MonoBehaviour
             levelTime += Time.deltaTime;
         }
 
+        if (Input.anyKey)
+        {
+            clickedTitle = true;
+        }
+        if(clickedTitle && !Input.anyKey && isTitleScreen)
+        {
+            isRunning = true;
+            isTitleScreen = false;
+            clickedTitle = false;
+            titleCanvas.gameObject.SetActive(false);
+            aliveCanvas.gameObject.SetActive(true);
+            Time.timeScale = 1;
+
+        }
         UpdateUI();
     }
 
@@ -52,6 +77,7 @@ public class GameController : MonoBehaviour
 
     void UpdateUI()
     {
+
         TimeUI.text = "Time: " + TimeSpan.FromSeconds(levelTime).ToString("mm\\:ss\\.fff"); 
     }
 
@@ -62,6 +88,7 @@ public class GameController : MonoBehaviour
             numberOfSwings++;
         }
     }
+
 
     public float getTime()
     {

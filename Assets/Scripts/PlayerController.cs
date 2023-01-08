@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     public Sprite grabSprite;
     public Sprite freeSprite;
     private SpriteRenderer sr;
-
     private Collider2D col;
 
     [Header("Audio")]
@@ -39,7 +38,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = startingVelocity;
         sr = GetComponent<SpriteRenderer>();
@@ -60,12 +58,8 @@ public class PlayerController : MonoBehaviour
 
         SetSprite();
 
-        if (!gameController.isRunning) {
-            col.enabled = false;
-        } else
-        {
-            col.enabled = true;
-        }
+
+        col.enabled = gameController.isRunning;
 
     }
 

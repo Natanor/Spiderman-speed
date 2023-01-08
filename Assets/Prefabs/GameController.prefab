@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1802214097144796653}
   - component: {fileID: 1802214097144796642}
+  - component: {fileID: 1650912976}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -45,3 +46,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeUI: {fileID: 0}
+  isRunning: 0
+  isTitleScreen: 0
+  aliveCanvas: {fileID: 0}
+  deathCanvas: {fileID: 0}
+  winCanvas: {fileID: 0}
+  titleCanvas: {fileID: 0}
+--- !u!114 &1650912976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802214097144796643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1422b1c9bc522f47898a2ce9180dd39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leaderboardLines:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  nameInputField: {fileID: 0}
+  titleGUI: {fileID: 0}

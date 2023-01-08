@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Climbing.unity
     guid: df1d2a98afbca1c418d2e0ba375d6d1a
+  - enabled: 1
+    path: Assets/Scenes/TOO FAST.unity
+    guid: 18e90dd8a34c7444fbf91be716d637ec
+  - enabled: 1
+    path: Assets/Scenes/CLIMBING 2 - THE REVENGE.unity
+    guid: a7f4b675938f19e4cb1d1838e8ff6892
   m_configObjects: {}
