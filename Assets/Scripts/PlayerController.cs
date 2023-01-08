@@ -10,10 +10,20 @@ public class PlayerController : MonoBehaviour
     public GameObject tether;
     public LayerMask wallMask;
     public float changeUpVelocitySensativity = 3.0f;
-    public float velocityReleaseMultiplier = 1.05f;
+    public float perfectReleaseMultiplier = 1.25f;
+    public float goodReleaseMultiplier = 1.1f;
     public float minimumVelocityForNoStuck = 1f;
     public float extraUpMultiplier = 0.1f;
     public GameController gameController;
+    public float perfectReleaseAngle = 25;
+    public float perfectReleaseAngleTolarence = 2;
+    public float goodReleaseAngleTolarence = 5;
+    public float bottomAngleTolorence = 2;
+    public ParticleSystem goodEffect;
+    public ParticleSystem perfectEffect;
+    public Vector2 startingVelocity = new Vector2(10, 10);
+
+    public bool wentThroughBottom;
 
     [Header("Sprites")]
     public Sprite grabSprite;
@@ -31,7 +41,7 @@ public class PlayerController : MonoBehaviour
     {
 
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(10, 10);
+        rb.velocity = startingVelocity;
         sr = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
 
@@ -126,7 +136,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.anyKey)
         {
-            
+            // SHOOT
             if (!isTethered)
             {
 
@@ -141,14 +151,36 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
+
+            // BOOST SET UP
+            if (Mathf.Abs(rb.rotation) <= bottomAngleTolorence)
+            {
+                wentThroughBottom = true;
+            }
         }
         else
         {
-            if (isTethered)
+            // BOOST
+            if (isTethered && wentThroughBottom)
             {
-                rb.velocity *= velocityReleaseMultiplier;
+                if(perfectReleaseAngle + perfectReleaseAngleTolarence >= Mathf.Abs(rb.rotation) && Mathf.Abs(rb.rotation) >= perfectReleaseAngle - perfectReleaseAngleTolarence)
+                {
+                    rb.velocity *= perfectReleaseMultiplier;
+                    Debug.Log("PERFECT");
+                    perfectEffect.gameObject.SetActive(true);
+                }
+                else if(perfectReleaseAngle + goodReleaseAngleTolarence >= Mathf.Abs(rb.rotation) && Mathf.Abs(rb.rotation) >= perfectReleaseAngle - goodReleaseAngleTolarence)
+                {
+                    rb.velocity *= goodReleaseMultiplier;
+                    Debug.Log("Good");
+                    goodEffect.gameObject.SetActive(true);
+                }
+
             }
+
+            // CLEAN UP
             isTethered = false;
+            wentThroughBottom = false;
         }
     }
 
