@@ -271,9 +271,12 @@ MonoBehaviour:
   gameController: {fileID: 0}
   perfectReleaseAngle: 25
   perfectReleaseAngleTolarence: 2
-  goodRealeaseAngleTolarence: 5
-  goodEffect: {fileID: 5024009746239566400}
-  perfectEffect: {fileID: 7226583673796176786}
+  goodReleaseAngleTolarence: 5
+  bottomAngleTolorence: 2
+  goodEffect: {fileID: 7226583673796176786}
+  perfectEffect: {fileID: 5024009746239566400}
+  startingVelocity: {x: 10, y: 10}
+  wentThroughBottom: 0
   grabSprite: {fileID: 21300000, guid: b4b4906620c437c49b66357d490758a4, type: 3}
   freeSprite: {fileID: 21300000, guid: 87bc653891c4bce419cf83dd51ce4461, type: 3}
   audioSource: {fileID: 4993606745273710977}
@@ -391,7 +394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2834140901965127007
 Transform:
   m_ObjectHideFlags: 0
@@ -540,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
       propertyPath: m_Name
-      value: GoodEffect
+      value: PerfectEffect
       objectReference: {fileID: 0}
     - target: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
       propertyPath: m_IsActive
@@ -567,7 +570,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7226583673155636401, guid: a2ab56839e1c9504ea9d141e95d0b16b, type: 3}
       propertyPath: m_Name
-      value: PerfectEffect
+      value: GoodEffect
       objectReference: {fileID: 0}
     - target: {fileID: 7226583673155636401, guid: a2ab56839e1c9504ea9d141e95d0b16b, type: 3}
       propertyPath: m_IsActive
