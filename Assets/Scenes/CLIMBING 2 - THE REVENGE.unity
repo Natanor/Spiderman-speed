@@ -664,29 +664,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6182571668191777003, guid: 4a10503b72d3ad94690d2cf920c2b94a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6182571668191777003, guid: 4a10503b72d3ad94690d2cf920c2b94a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReloadLevel
-      objectReference: {fileID: 0}
     - target: {fileID: 6465377927136855007, guid: 4a10503b72d3ad94690d2cf920c2b94a, type: 3}
       propertyPath: m_Name
       value: Dead Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6465377927136855007, guid: 4a10503b72d3ad94690d2cf920c2b94a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7949295701662963797, guid: 4a10503b72d3ad94690d2cf920c2b94a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7949295701662963797, guid: 4a10503b72d3ad94690d2cf920c2b94a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadMainMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a10503b72d3ad94690d2cf920c2b94a, type: 3}
@@ -1097,10 +1077,6 @@ PrefabInstance:
     - target: {fileID: 6495850394506592075, guid: ec8b489bfee66ab4d8170900db8fee5c, type: 3}
       propertyPath: m_Name
       value: TitleCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495850394506592075, guid: ec8b489bfee66ab4d8170900db8fee5c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6495850394506592079, guid: ec8b489bfee66ab4d8170900db8fee5c, type: 3}
       propertyPath: m_Pivot.x
